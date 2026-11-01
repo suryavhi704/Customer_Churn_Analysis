@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Customer Churn Prediction</title>
+
+    <style>
+        /* General page design */
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 30px 15px;
+            color: #1e293b;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1d4ed8;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-top: 25px;
+            color: #334155;
+        }
+
+        /* Responsive form grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid #93c5fd;
+            border-color: #2563eb;
+        }
+
+        /* Predict button */
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        /* Prediction result */
+        .result {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 8px;
+            background: #dcfce7;
+            color: #166534;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #fee2e2;
+            color: #991b1b;
+            text-align: center;
+        }
+
+        /* Make form fit mobile screens */
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Customer Churn Prediction</h1>
+
+        <p class="subtitle">
+            Enter customer details to predict whether the
+            customer is likely to leave the bank.
+        </p>
+
+        <form method="POST" action="/">
+
+            <h2>Customer Information</h2>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label for="CreditScore">Credit Score</label>
+                    <input type="number" id="CreditScore"
+                           name="CreditScore"
+                           min="300" max="900"
+                           value="619" required>
+                </div>
+
+                <div class="field">
+                    <label for="Geography">Geography</label>
+                    <select id="Geography" name="Geography" required>
+                        <option value="France">France</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Spain">Spain</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="Gender">Gender</label>
+                    <select id="Gender" name="Gender" required>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="Age">Age</label>
+                    <input type="number" id="Age" name="Age"
+                           min="18" max="65"
+                           value="42" required>
+                </div>
+
+                <div class="field">
+                    <label for="Tenure">Tenure (years)</label>
+                    <input type="number" id="Tenure" name="Tenure"
+                           min="0" max="10"
+                           value="2" required>
+                </div>
+
+                <div class="field">
+                    <label for="Balance">Account Balance</label>
+                    <input type="number" id="Balance" name="Balance"
+                           min="0" step="any"
+                           value="0" required>
+                </div>
+
+                <div class="field">
+                    <label for="NumOfProducts">Number of Products</label>
+                    <select id="NumOfProducts" name="NumOfProducts">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="HasCrCard">Has Credit Card?</label>
+                    <select id="HasCrCard" name="HasCrCard">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="IsActiveMember">Active Member?</label>
+                    <select id="IsActiveMember" name="IsActiveMember">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="EstimatedSalary">
+                        Estimated Salary
+                    </label>
+                    <input type="number" id="EstimatedSalary"
+                           name="EstimatedSalary"
+                           min="0" step="any"
+                           value="101348.88" required>
+                </div>
+
+            </div>
+
+            <button type="submit">Predict Customer Churn</button>
+
+        </form>
+
+        {% if result %}
+            <div class="result">
+                {{ result }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
